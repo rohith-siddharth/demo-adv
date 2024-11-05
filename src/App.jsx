@@ -5,6 +5,7 @@ import axios from "axios";
 function App() {
   const [name, setName] = useState("customer from store");
   const [email, setEmail] = useState("storecustomer@gmail.com");
+  const [environment, setEnvironment] = useState("dev"); // New state for environment
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [queryParams, setQueryParams] = useState({ offerId: "", sessionId: "" });
@@ -35,7 +36,7 @@ function App() {
 
     try {
       const response = await axios.post(
-        "https://dev.personapay.tech/advertisers/campaign/conversion/webhook",
+        `https://${environment}.personapay.tech/advertisers/campaign/conversion/webhook`,
         {
           offerId: queryParams.offerId,
           sessionId: queryParams.sessionId,
@@ -77,6 +78,16 @@ function App() {
             placeholder="Enter your email"
             style={styles.input}
           />
+          <p style={styles.label}>Environment</p>
+          <select
+            value={environment}
+            onChange={(e) => setEnvironment(e.target.value)}
+            style={styles.select} // New style for the dropdown
+          >
+            <option value="dev">Development</option>
+            <option value="staging">Staging</option>
+            <option value="prod">Production</option>
+          </select>
           <br />
           <button type="submit" style={styles.button} disabled={loading}>
             {loading ? "Submitting..." : "Submit"}
@@ -114,6 +125,14 @@ const styles = {
     marginBottom: "10px",
   },
   input: {
+    width: "100%",
+    padding: "10px",
+    marginBottom: "20px",
+    fontSize: "1.2rem",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+  },
+  select: {
     width: "100%",
     padding: "10px",
     marginBottom: "20px",
