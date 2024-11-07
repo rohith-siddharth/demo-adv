@@ -8,18 +8,18 @@ function App() {
   const [environment, setEnvironment] = useState("dev"); // New state for environment
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [queryParams, setQueryParams] = useState({ offerId: "", sessionId: "" });
+  const [queryParams, setQueryParams] = useState({ eventId: "", sessionId: "" });
 
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    const offerId = searchParams.get("offerId");
+    const eventId = searchParams.get("eventId");
     const sessionId = searchParams.get("sessionId");
 
-    if (!offerId || !sessionId) {
-      setError("Invalid link, missing offerId or sessionId.");
+    if (!eventId || !sessionId) {
+      setError("Invalid link, missing eventId or sessionId.");
     } else {
-      setQueryParams({ offerId, sessionId });
+      setQueryParams({ eventId, sessionId });
     }
   }, [searchParams]);
 
@@ -38,8 +38,9 @@ function App() {
       const response = await axios.post(
         `https://${environment}.personapay.tech/advertisers/campaign/conversion/webhook`,
         {
-          offerId: queryParams.offerId,
+          eventId: queryParams.eventId,
           sessionId: queryParams.sessionId,
+          triggeredAt: Date.now()
         },
         {
           headers: {
