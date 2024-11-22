@@ -34,11 +34,23 @@ function App() {
       return;
     }
 
+    let url = `https://${environment}.personapay.tech/advertisers/campaign/conversion/webhook`;
+
+    if (environment === "prod") {
+      url = `https://personapay.tech/advertisers/campaign/conversion/webhook`;
+    }
+
+    let eventId = queryParams.eventId;
+
+    if (environment === "prod") {
+      eventId = "ecab02a3-54bd-4ace-b40d-6e77fa5cc7ec"
+    }
+
     try {
       const response = await axios.post(
         `https://${environment}.personapay.tech/advertisers/campaign/conversion/webhook`,
         {
-          eventId: queryParams.eventId,
+          eventId: eventId,
           sessionId: queryParams.sessionId,
           triggeredAt: Date.now()
         },
