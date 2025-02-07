@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 function App() {
  useEffect(() => {
    const script = document.createElement('script');
-   script.src = 'https://storage.googleapis.com/global-assets-personapay/assets/files/js/index.js';
+   script.src = 'https://storage.googleapis.com/global-assets-personapay/assets/files/js/sdk-index.js';
    script.async = true;
    script.onload = () => {
      // @ts-ignore
