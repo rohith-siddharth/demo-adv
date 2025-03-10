@@ -101,6 +101,25 @@ const CheckoutPage = () => {
   Set Cookie test
 </button>
 
+<button 
+  onClick={async () => {
+    try {
+      const response = await fetch("https://backend-test-t21m.onrender.com/check-cookie", {
+        method: "GET",
+        credentials: "include", // ✅ Required for cross-site cookies
+      });
+
+      const data = await response.json();
+      console.log(data.message); // Log the response message
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }} 
+  style={styles.button}
+>
+  check Cookie test
+</button>
+
               </form>
             </div>
           </div>
