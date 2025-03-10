@@ -5,8 +5,8 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate('/thank-you');
+    // e.preventDefault();
+    // navigate('/thank-you');
   };
 
   return (
@@ -80,6 +80,21 @@ const CheckoutPage = () => {
 
                 <button type="submit" style={styles.button}>
                   Place Order
+                </button>
+
+                <button 
+                  onClick={async () => {
+                    try {
+                      const response = await fetch('https://backend-test-t21m.onrender.com/set-cookie');
+                      const data = await response.json();
+                      console.log(data.message); // Log the response message
+                    } catch (error) {
+                      console.error('Error:', error);
+                    }
+                  }} 
+                  style={styles.button}
+                >
+                  Set Cookie
                 </button>
               </form>
             </div>
