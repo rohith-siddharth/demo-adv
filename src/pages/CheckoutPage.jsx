@@ -83,19 +83,24 @@ const CheckoutPage = () => {
                 </button>
 
                 <button 
-                  onClick={async () => {
-                    try {
-                      const response = await fetch('https://backend-test-t21m.onrender.com/set-cookie');
-                      const data = await response.json();
-                      console.log(data.message); // Log the response message
-                    } catch (error) {
-                      console.error('Error:', error);
-                    }
-                  }} 
-                  style={styles.button}
-                >
-                  Set Cookie
-                </button>
+  onClick={async () => {
+    try {
+      const response = await fetch("https://backend-test-t21m.onrender.com/set-cookie", {
+        method: "GET",
+        credentials: "include", // ✅ Required for cross-site cookies
+      });
+
+      const data = await response.json();
+      console.log(data.message); // Log the response message
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }} 
+  style={styles.button}
+>
+  Set Cookie test
+</button>
+
               </form>
             </div>
           </div>
